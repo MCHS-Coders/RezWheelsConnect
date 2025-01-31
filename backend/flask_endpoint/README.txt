@@ -1,15 +1,13 @@
-README for Flask API
-Overview
+This Flask application provides an API for processing satellite signals to determine the position of a device using trilateration. The application accepts satellite positions and pseudoranges, performs calculations to find the device's location, and returns the results in JSON format.
 
-This Flask application provides an API for processing satellite signals to determine the position of a device using trilateration. The application accepts satellite positions and pseudoranges, performs calculations to find the device's location, and returns the results in JSON format. (for now)
-Features
+Features:
 
     Accepts POST requests with satellite data and pseudoranges.
     Uses least squares optimization to calculate the device's position.
     Returns the calculated position in a structured JSON response.
     Handles errors and provides appropriate HTTP status codes.
 
-Dependencies
+Dependencies:
 
 To run this application, you need to have the following Python packages installed:
 
@@ -17,7 +15,7 @@ To run this application, you need to have the following Python packages installe
     NumPy: A library for numerical computations in Python.
     SciPy: A library used for scientific and technical computing, specifically for optimization in this application.
 
-Installation
+Installation:
 
     Set Up a Virtual Environment (optional but recommended):
 

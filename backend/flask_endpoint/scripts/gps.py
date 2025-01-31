@@ -1,11 +1,31 @@
-from flask import Flask, request, jsonify
 import numpy as np
 from scipy.optimize import least_squares
 
-app = Flask(__name__)
-
 # Helper function for trilateration
 def trilaterate(satellite_positions, pseudoranges):
+    # Define a function for validating input.
+    def validate_input(satellite_data, pseudoranges):
+        # Check if the input is a list of dictionaries for satellite_data
+        if not isinstance(satellite_data, list) or not all(isinstance(sat, dict) and 'position' in sat for sat in satellite_data):
+            return False, "satellite_data must be a list of dictionaries with 'position' key."
+    
+        # Check if the position is a list/tuple of length 3
+        for sat in satellite_data:
+            if not isinstance(sat['position'], (list, tuple)) or len(sat['position']) != 3:
+                return False, "Each satellite position must be a list or tuple of length 3."
+
+        # Check if pseudoranges are a list of numerical values
+        if not isinstance(pseudoranges, list) or not all(isinstance(p, (int, float)) for p in pseudoranges):
+            return False, f"pseudoranges must be a list of numerical values, but received: {pseudoranges}"
+
+        return True, ""
+    
+    # Validate the inputs
+    valid, message = validate_input(satellite_positions, pseudoranges)
+    if not valid:
+        print(f"[ERROR]: {message}")  # Output the error message
+        return False, message  # Return the error
+
     # Initial guess for the receiver's position (x, y, z)
     initial_guess = [0, 0, 0]
 
@@ -21,36 +41,6 @@ def trilaterate(satellite_positions, pseudoranges):
     
     # Use least squares optimization to find the receiver's position
     result = least_squares(residuals, initial_guess, args=(satellite_positions, pseudoranges))
-    return result.x
-
-@app.route('/process_signals', methods=['POST'])
-def process_signals():
-    data = request.get_json()
-
-    # Extract satellite positions and pseudoranges from the request
-    satellite_data = data.get('satellite_data', [])
-    pseudoranges = data.get('pseudoranges', [])
-
-    if not satellite_data or not pseudoranges or len(satellite_data) < 4 or len(pseudoranges) < 4:
-        return jsonify({"error": "Insufficient data. At least 4 satellites are required."})
-
-    # Extract positions of the satellites
-    satellite_positions = []
-    for satellite in satellite_data:
-        satellite_positions.append(satellite['position'])
-
-    # Perform trilateration to find the device's position
-    try:
-        device_position = trilaterate(satellite_positions, pseudoranges)
-        return jsonify({
-            "device_position": {
-                "latitude": device_position[0],
-                "longitude": device_position[1],
-                "altitude": device_position[2]
-            }
-        })
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-def main():
-    app.run(debug=True, host='0.0.0.0', port=4000)
+    
+    # Return the optimized position (x, y, z)
+    return True, result.x

@@ -1,4 +1,4 @@
-package com.example.helloworldapp;
+package com.example.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
