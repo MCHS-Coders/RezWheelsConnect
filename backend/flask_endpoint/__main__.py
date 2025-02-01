@@ -1,6 +1,11 @@
 from flask import Flask, request, jsonify
-from assets import gps
-from assets.p2p import p2p_manager
+from flask import Flask, request, jsonify
+from . import assets
+from . import scripts
+from .scripts import gps
+from .assets import p2p
+from threading import Thread
+
 from threading import Thread
 
 app = Flask(__name__)
@@ -115,6 +120,4 @@ def run_flask():
     print(f"[INFO] Running app on port {port}")
     app.run(debug=True, port=port)
 
-
-if __name__ == "__main__":
-    run_flask()
+run_flask()
