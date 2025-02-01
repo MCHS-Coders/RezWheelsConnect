@@ -1,7 +1,7 @@
 from threading import Thread
 import subprocess
+import os
 
-# Path to your Node.js script
 node_script = 'server.js'
 
 def start_node(node_script):
@@ -27,7 +27,7 @@ def start_node(node_script):
     if stderr:
         print('Error:', stderr.strip())
 
-# Make a main function to allow the script to be run in a separate thread.
+# Main function to allow the script to be run in a separate thread.
 def main(node_script):
     node_Thread = Thread(target=start_node, args=(node_script,))
     node_Thread.start()

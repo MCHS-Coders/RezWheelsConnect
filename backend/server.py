@@ -54,7 +54,7 @@ ascii_art = """
 """
 
 version = "0.7.4"
-contributors = ["Issac Kee ()", "Colton Lee (Collaborating programmer)", "Ethan Lowrey (Lead programmer)", "Kenzie Mccabe ()", "Peyton Dineyazhe ()"]
+contributors = ["Issac Kee ()", "Colton Lee (Collaborating programmer, Prototype section of proposal)", "Ethan Lowrey (Lead programmer, Director of Application, Prototype section of proposal)", "Kenzie Mccabe (Introduction of proposal)", "Peyton Dineyazhe (Surveys, Emailing, Proposal)"]
 contributors_str = ""
 for contributor in contributors:
     contributors_str += f"\n{contributor}, "
