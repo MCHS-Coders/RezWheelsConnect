@@ -23,7 +23,7 @@ def process_signals():
 
     # Perform trilateration to find the device's position
     try:
-        # Assuming gps.trilaterate takes positions (lat, lon, alt) and pseudoranges
+        # gps.trilaterate takes positions (lat, lon, alt) and pseudoranges
         device_position = gps.trilaterate(satellite_positions, pseudoranges)
         return jsonify({
             "device_position": {
@@ -41,9 +41,5 @@ def run_flask():
     print("Running app on port", port)
     app.run(debug=True, port=port)
 
-# Your main function
-def main():
-    flask_thread = Thread(target=run_flask)
-    flask_thread.start()
 
-main()
+run_flask()

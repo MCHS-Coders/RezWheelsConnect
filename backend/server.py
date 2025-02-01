@@ -1,3 +1,9 @@
+'''
+RezWheels-Connect made by AISES.
+Note: The webapp part of this script was cut out because of time-restraints.
+'''
+
+from node_endpoint import __main__
 import subprocess
 
 ascii_art = """
@@ -43,25 +49,24 @@ ascii_art = """
 ↑↑↑↑↑↑↑↑↑↑↑↑ ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ↑ ↑↑ ↑  ↑    ↑ ↑ ↑↑↑↑↑↑  ↑↑↑↑↑↑↑ ↑ ↑     ↑↑  ↑↑↑↑     ↑↑↑↑↑
 ↑↑↑↑↑↑↑  ↑↑  ↑ ↑↑ ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ↑ ↑↑↑↑      ↑↑↑↑↑↑  ↑      ↑↑↑↑↑↑↑↑↑↑   ↑↑          ↑↑↑↑
 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+
 """
 
 version = "0.7.4"
-contributors = ["Issac Kee", "Colton Lee", "Ethan Lowrey", "Kenzie Mccabe", "Peyton Dineyazhe"]
+contributors = ["Issac Kee ()", "Colton Lee (Collaborating programmer)", "Ethan Lowrey (Lead programmer)", "Kenzie Mccabe ()", "Peyton Dineyazhe ()"]
 contributors_str = ""
 for contributor in contributors:
-    contributors_str += f"{contributor}, "
+    contributors_str += f"\n{contributor}, "
 contributors_str += " "
 contributors_str, _ = contributors_str.split(",  ", 1)
 contributors_str += "."
 org = "AISES"
 
 print(ascii_art)
-print("\n\nWelcome to the RezWheels server!") # Add some whitespace for clarity.
+print("Welcome to the RezWheels server!") # Add some whitespace for clarity.
 print(f"[Version]: {version}")
 print(f"[Contributors]: {contributors_str}")
 print(f"[Organization]: {org}")
 
-# import node_endpoint
-import flask_endpoint
-
-input()
+from flask_endpoint import __main__ # Start the flask endpoint in the main thread.
